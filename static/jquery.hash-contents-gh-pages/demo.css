@@ -1,0 +1,21 @@
+body{
+	padding:0 0 1000px;
+}
+div.page-header{
+	margin-top:64px;
+	margin-bottom:-32px
+}
+.main-cotents > h3,
+.sub-cotents > h3,
+.main-cotents > .contents > h3{
+	padding-top:48px;
+}
+.main-cotents > h4,
+.sub-cotents > h4,
+.main-cotents > .contents > h4{
+	margin:48px 0 16px;
+	color:#507090;
+}
+strong{
+	color:#ff3355;
+}

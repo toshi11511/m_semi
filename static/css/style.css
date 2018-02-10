@@ -1,0 +1,10 @@
+#bootstrap-menu{
+    margin-top:16px;
+    float: left;
+    width:180px;
+}
+#contents{
+    padding:0 0 200px 16px;
+    float: left;
+    border-left:solid 1px #eee;
+}

@@ -1,0 +1,1718 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=8,IE=9,IE=10,IE=11,IE=12" />
+<title>Hash Contents | jQuery Plugin :: Demo</title>
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="screen" >
+<link href="http://cyokodog.github.io/jquery.ex-code-prettify/jquery.ex-code-prettify.css" rel="stylesheet" type="text/css" media="screen" >
+<!--
+<link href="jquery.hash-contents.css" rel="stylesheet" type="text/css" media="screen" >
+-->
+<style>
+body{
+	margin-bottom:1000px;
+}
+.alert strong{
+	color:#ff5577;
+	font-size:140%;
+}
+</style>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="http://cyokodog.github.io/jquery.ex-code-prettify/google-code-prettify/prettify.js"></script>
+<script src="http://cyokodog.github.io/jquery.ex-code-prettify/jquery.ex-code-prettify.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.3.1/jquery.cookie.min.js"></script>
+<script src="jquery.hash-contents.js"></script>
+
+<script>
+jQuery(function($){
+
+	$(window).on('hashchange.demo', (function(){
+		$('div.alert').html('location.hash is <strong/>').find('strong').text(location.hash || 'Nothing').hide().fadeIn();
+		return arguments.callee;
+	})());
+
+	$('div.demo').hashContents({
+		useHash : false,
+		useCookie : true,
+		reloadHashChange : true,
+		idPrefix : 'Demo',
+		listTo : 'ul.demo-index',
+		activeTitleTo : 'span.demo-title',
+		onActive : function(api){
+			if(api.getActiveTarget().prop('id') == 'Demo15'){
+				$('div.demo-index-group').hide();
+			}
+			$('textarea.code').exCodePrettify({
+				tabToSpace : true,
+				showDemo : true,
+				editCode : true
+			});
+		}
+	});
+
+});
+</script>
+</head>
+<body>
+	<div class="navbar navbar-default navbar-fixed-topx" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="https://github.com/cyokodog/jquery.ex-code-prettify/blob/gh-pages/README.md" target="_blank"><span class="glyphicon glyphicon-book"></span> Document</a></li>
+					<li><a href="https://github.com/cyokodog/jquery.ex-code-prettify" target="_blank"><b class="glyphicon glyphicon-download-alt"></b> Download</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="page-header">
+			<h1>Hash Contents</h1>
+			<p class="lead">$( contents ).HashContents();</p>
+			<div class="btn-group demo-index-group">
+				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					<span class="demo-title"></span> <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu demo-index" role="menu">
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="alert alert-success"></div>
+
+		<!-- Demo1 -->
+		<div class="demo">
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<div id="contents">
+	<div id="home"><h3>Home</h3>...</div>
+	<div id="profile"><h3>Profile</h3>...</div>
+	<div id="access"><h3>Access</h3>...</div>
+</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('#contents > div').hashContents();
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+#contents .hash-contents-list .active a{
+	color:#ff5577;
+}
+</textarea>
+			</div>
+		</div>
+
+
+
+		<!-- Demo2 -->
+		<div class="demo">
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<div id="A">
+	<div id="home"><h3>Home</h3>...</div>
+	<div id="profile"><h3>Profile</h3>...</div>
+</div>
+<div id="B">
+	<div id="access"><h3>Access</h3>...</div>
+	<div id="message"><h3>Message</h3>...</div>
+</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('#A > div').hashContents();
+$('#B > div').hashContents();
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+#A .hash-contents-list .active a,
+#B .hash-contents-list .active a{
+	color:#ff5577;
+}
+</textarea>
+			</div>
+		</div>
+
+		<!-- Demo3 -->
+		<div class="demo">
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<div class="contents">
+	<div id="javascript">
+		<h3>JavaScript</h3>...
+		<div id="jquery">
+			<h4>jQuery</h4>...
+		</div>
+		<div id="backbone_js">
+			<h4>Backbone.js</h4>...
+		</div>
+	</div>
+	<div id="css">
+		<h3>CSS</h3>...
+		<div id="bootstrap">
+			<h4>Bootstrap</h4>...
+		</div>
+		<div id="sass">
+			<h4>Sass</h4>...
+		</div>
+	</div>
+</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('.contents > div').hashContents({
+	nestSelector : '> div'
+});
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+div.contents ul.hash-contents-list,
+div.contents div.hash-contents{
+	margin:0;
+	padding:16px 0 16px 32px;
+	overflow:hidden;
+	border-left:solid 4px #f8f8f8;
+}
+div.contents ul.hash-contents-list{
+	background:#f8f8f8;
+}
+div.contents li.active a{
+	color:#ff5577;
+}
+</textarea>
+			</div>
+		</div>
+
+
+
+		<!-- Demo4 -->
+		<div class="demo">
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'cssFile'}">
+jquery.hash-contents.css
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<div class="contents top-list">
+	<div id="home1"><h3>Home</h3>...</div>
+	<div id="profile1"><h3>Profile</h3>...</div>
+	<div id="access1"><h3>Access</h3>...</div>
+</div>
+<hr/>
+<div class="contents left-list">
+	<div id="home2"><h3>Home</h3>...</div>
+	<div id="profile2"><h3>Profile</h3>...</div>
+	<div id="access2"><h3>Access</h3>...</div>
+</div>
+<hr/>
+<div class="contents right-list">
+	<div id="home3"><h3>Home</h3>...</div>
+	<div id="profile3"><h3>Profile</h3>...</div>
+	<div id="access3"><h3>Access</h3>...</div>
+</div>
+<hr/>
+<div class="contents bottom-list">
+	<div id="home4"><h3>Home</h3>...</div>
+	<div id="profile4"><h3>Profile</h3>...</div>
+	<div id="access4"><h3>Access</h3>...</div>
+</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('div.contents').each(function(){
+	$(this).find('> div').hashContents();
+});
+</textarea>
+			</div>
+		</div>
+
+
+		<!-- Demo5 -->
+		<div class="demo">
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'cssFile'}">
+jquery.hash-contents.css
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<div class="contents top-list top-line">
+	<div id="home1"><h3>Home</h3>...</div>
+	<div id="profile1"><h3>Profile</h3>...</div>
+	<div id="access1"><h3>Access</h3>...</div>
+</div>
+<hr/>
+<div class="contents left-list left-line">
+	<div id="home2"><h3>Home</h3>...</div>
+	<div id="profile2"><h3>Profile</h3>...</div>
+	<div id="access2"><h3>Access</h3>...</div>
+</div>
+<hr/>
+<div class="contents right-list right-line">
+	<div id="home3"><h3>Home</h3>...</div>
+	<div id="profile3"><h3>Profile</h3>...</div>
+	<div id="access3"><h3>Access</h3>...</div>
+</div>
+<hr/>
+<div class="contents bottom-list bottom-line">
+	<div id="home4"><h3>Home</h3>...</div>
+	<div id="profile4"><h3>Profile</h3>...</div>
+	<div id="access4"><h3>Access</h3>...</div>
+</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('div.contents').each(function(){
+	$(this).find('> div').hashContents();
+});
+</textarea>
+			</div>
+		</div>
+
+
+		<!-- Demo6 -->
+		<div class="demo">
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'cssFile'}">
+jquery.hash-contents.css
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<div class="contents top-list top-tab">
+	<div id="home1"><h3>Home</h3>...</div>
+	<div id="profile1"><h3>Profile</h3>...</div>
+	<div id="access1"><h3>Access</h3>...</div>
+</div>
+<hr/>
+<div class="contents left-list left-tab">
+	<div id="home2"><h3>Home</h3>...</div>
+	<div id="profile2"><h3>Profile</h3>...</div>
+	<div id="access2"><h3>Access</h3>...</div>
+</div>
+<hr/>
+<div class="contents right-list right-tab">
+	<div id="home3"><h3>Home</h3>...</div>
+	<div id="profile3"><h3>Profile</h3>...</div>
+	<div id="access3"><h3>Access</h3>...</div>
+</div>
+<hr/>
+<div class="contents bottom-list bottom-tab">
+	<div id="home4"><h3>Home</h3>...</div>
+	<div id="profile4"><h3>Profile</h3>...</div>
+	<div id="access4"><h3>Access</h3>...</div>
+</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('div.contents').each(function(){
+	$(this).find('> div').hashContents();
+});
+</textarea>
+			</div>
+		</div>
+
+
+
+
+		<!-- Demo7 -->
+		<div class="demo">
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<div id="contents">
+	<div id="home"><h3>Home</h3>...</div>
+	<div id="profile"><h3>Profile</h3>...</div>
+	<div id="access"><h3>Access</h3>...</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('#contents > div').hashContents({
+	baseStyle : 'accordion'
+});
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+#contents .hash-contents-list a{
+	padding:8px;
+	display:block;
+	text-decoration:none;
+	background:#fafafa;
+	border-bottom:solid 1px #f0f0f0;
+}
+#contents .hash-contents{
+	padding:8px;
+}
+</textarea>
+			</div>
+		</div>
+
+
+
+
+		<!-- Demo8 -->
+		<div class="demo">
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'cssFile'}">
+jquery.hash-contents.css
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<div id="contents" class="accordion">
+	<div id="home"><h3>Home</h3>...</div>
+	<div id="profile"><h3>Profile</h3>...</div>
+	<div id="access"><h3>Access</h3>...</div>
+</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('#contents > div').hashContents({
+	baseStyle : 'accordion'
+});
+</textarea>
+			</div>
+		</div>
+
+
+
+
+
+
+
+
+
+		<!-- Demo9 -->
+		<div class="demo">
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'cssFile'}">
+jquery.hash-contents.css
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<div id="contents" class="accordion">
+	<div id="home"><h3>Home</h3>...</div>
+	<div id="profile"><h3>Profile</h3>...</div>
+	<div id="access"><h3>Access</h3>...</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('#contents > div').hashContents({
+	baseStyle : 'accordion',
+	clickableContents : true
+});
+</textarea>
+			</div>
+		</div>
+
+
+		<!-- Demo10 -->
+		<div class="demo">
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'cssFile'}">
+jquery.hash-contents.css
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<div id="contents" class="tree">
+	<div id="home">
+		<h3>Home</h3>
+		<div data-title="1.1 ">
+			<p>1.1 section</p>
+			<div data-title="1.1.1">
+				<p>1.1.1 section</p>
+			</div>
+			<div data-title="1.1.2">
+				<p>1.1.2 section</p>
+			</div>
+		</div>
+		<div data-title="1.2">
+			<p>1.2 Section</p>
+		</div>
+	</div>
+	<div id="profile">
+		<h3>Profile</h3>
+		<div data-title="2.1 ">
+			<p>2.1 section</p>
+		</div>
+		<div data-title="2.2">
+			<p>2.2 Section</p>
+		</div>
+	</div>
+	<div id="access"><h3>Access</h3>...</div>
+</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('#contents > div').hashContents({
+	baseStyle : 'tree',
+	nestSelector : '> div'
+});
+</textarea>
+			</div>
+		</div>
+
+
+		<!-- Demo11 -->
+		<div class="demo">
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'cssFile'}">
+jquery.hash-contents.css
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<div id="contents">
+	<div id="home"><h3>Home</h3>...</div>
+	<div id="profile"><h3>Profile</h3>...</div>
+	<div id="access"><h3>Access</h3>...</div>
+</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('#contents > div').hashContents({
+	baseStyle : 'toc'
+});
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+#contents .hash-contents-list .active a{
+	color:#ff5577;
+}
+</textarea>
+			</div>
+		</div>
+
+
+
+
+
+
+
+
+
+		<!-- Demo12 -->
+		<div class="demo">
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'cssFile'}">
+jquery.hash-contents.css
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<div class="contents toc right-toc">
+	<div id="home1"><h3>Home</h3>...</div>
+	<div id="profile1"><h3>Profile</h3>...</div>
+	<div id="access1"><h3>Access</h3>...</div>
+</div>
+<hr/>
+<div class="contents toc left-toc">
+	<div id="home2"><h3>Home</h3>...</div>
+	<div id="profile2"><h3>Profile</h3>...</div>
+	<div id="access2"><h3>Access</h3>...</div>
+</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('div.contents').each(function(){
+	$(this).find('> div').hashContents({
+		baseStyle : 'toc'
+	});
+});
+</textarea>
+			</div>
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+		<!-- Demo -->
+		<div class="demo">
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+
+<div id="bootstrap-menu" class="btn-group">
+	<button type="button" class="btn btn-default dropdown-toggle"
+	data-toggle="dropdown">
+		<span class="active-menu"></span> <span class="caret"></span>
+	</button>
+	<ul class="dropdown-menu" role="menu">
+	</ul>
+</div>
+<div id="contents">
+	<div id="home"><h3>Home</h3>...</div>
+	<div id="profile"><h3>Profile</h3>...</div>
+	<div id="access"><h3>Access</h3>...</div>
+</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('#contents > div').hashContents({
+	listTo : '#bootstrap-menu ul.dropdown-menu',
+	activeTitleTo : '#bootstrap-menu span.active-menu',
+});
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+#bootstrap-menu{
+	margin-top:16px;
+	float: left;
+	width:180px;
+}
+#contents{
+	padding:0 0 200px 16px;
+	float: left;
+	border-left:solid 1px #eee;
+}
+</textarea>
+			</div>
+		</div>
+
+
+
+
+
+
+
+
+
+		<!-- Demo -->
+		<div class="demo">
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<div id="contents">
+	<div id="home"><h3>Home</h3>...</div>
+	<div id="profile"><h3>Profile</h3>...</div>
+	<div id="access"><h3>Access</h3>...</div>
+</div>
+<p><a href="demo.html">Reload</a> したら先頭コンテンツがアクティブになります</p>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('#contents > div').hashContents({
+	useHash : false
+});
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+#contents .hash-contents-list .active a{
+	color:#ff5577;
+}
+</textarea>
+			</div>
+		</div>
+
+
+
+		<!-- Demo -->
+		<div class="demo">
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<div id="contents">
+	<div id="home"><h3>Home</h3>...</div>
+	<div id="profile"><h3>Profile</h3>...</div>
+	<div id="access"><h3>Access</h3>...</div>
+</div>
+<p><a href="demo.html">Reload</a> してもアクティブコンテンツは記憶されてます</p>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('#contents > div').hashContents({
+	useHash : false,
+	useCookie : true
+});
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+#contents .hash-contents-list .active a{
+	color:#ff5577;
+}
+</textarea>
+			</div>
+		</div>
+
+
+
+
+
+
+		<!-- Demo -->
+		<div class="demo">
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<div id="contents">
+	<div id="home"><h3>Home</h3></div>
+	<div id="profile"><h3>Profile</h3></div>
+	<div id="access"><h3>Access</h3></div>
+	<ul class="info">
+		<li>アクティブコンテンツの ID は <strong id="activeId"></strong> です</li>
+		<li>非アクティブコンテンツは削除されたので h3 の数は <strong id="headingSize"></strong> です</li>
+	</ul>
+</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('#contents > div').hashContents({
+	reloadHashChange : true,
+	onActive : function(api){
+		var color = {
+			home : '#ddeeff',
+			profile : '#eeddff',
+			access : '#ddffee'
+		};
+		var activeId = api.getActiveTarget().prop('id');
+		$('#contents').css('background', color[activeId])
+
+		$('#activeId').text(activeId);
+		var headingSize = $('h3').size();
+		$('#headingSize').text(headingSize);
+
+	}
+});
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+#contents{
+	padding: 16px;
+}
+ul.info strong,
+#contents .hash-contents-list .active a{
+	color:#ff5577;
+}
+</textarea>
+			</div>
+		</div>
+
+
+
+<!--
+		<div class="demo">
+			<p>
+				titleSelector を指定し、h4 の値をリンクリストのテキストとして出力する。
+			</p>
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<div class="sec" id="home"><h4>Home</h4>...</div>
+<div class="sec" id="profile"><h4>Profile</h4>...</div>
+<div class="sec" id="access"><h4>Access</h4>...</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('div.sec').hashContents({
+	titleSelector : 'h4'
+});
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+.hash-contents-list .active a{
+	color:#ff5577;
+}
+</textarea>
+			</div>
+		</div>
+
+
+
+		<div class="demo">
+			<p>
+				data-title 属性で、リンクリストのテキストを指定する。
+			</p>
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<div class="sec" id="home" data-title="Home">Home is ...</div>
+<div class="sec" id="profile" data-title="Profile">Profile is ...</div>
+<div class="sec" id="access"  data-title="Access">Access is ...</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('.sec').hashContents();
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+.hash-contents-list .active a{
+	color:#ff5577;
+}
+</textarea>
+			</div>
+		</div>
+
+
+		<div class="demo">
+			<p>
+				タイトルの指定が見つからない場合は、コンテンツ要素の id がリンクリストのテキストとして出力される。
+			</p>
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<div class="sec" id="Home">Home is ...</div>
+<div class="sec" id="Profile">Profile is ...</div>
+<div class="sec" id="Access">Access is ...</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('div.sec').hashContents();
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+.hash-contents-list .active a{
+	color:#ff5577;
+}
+</textarea>
+			</div>
+		</div>
+
+
+		<div class="demo">
+			<p>
+				コンテンツ要素に id が設定されてない場合は、自動的に付与される。
+			</p>
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<div class="sec">Home is ...</div>
+<div class="sec">Profile is ...</div>
+<div class="sec">Access is ...</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('div.sec').hashContents();
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+.hash-contents-list .active a{
+	color:#ff5577;
+}
+</textarea>
+			</div>
+		</div>
+
+
+		<div class="demo">
+			<p>
+				コンテンツ id の自動付与の場合、idPrefix で id の接頭句を指定できる。
+			</p>
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<div class="sec">Home is ...</div>
+<div class="sec">Profile is ...</div>
+<div class="sec">Access is ...</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('div.sec').hashContents({
+	idPrefix : 'Act.'
+});
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+.hash-contents-list .active a{
+	color:#ff5577;
+}
+</textarea>
+			</div>
+		</div>
+
+
+
+
+
+
+		<div class="demo">
+			<p>
+				タイトルの指定が見つからない場合は、コンテンツ要素の id がリンクリストのテキストとして出力される。
+			</p>
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<div class="sec" id="home"><h3>Home</h3>...</div>
+<div class="sec" id="profile"><h3>Profile</h3>...</div>
+<div class="sec" id="access"><h3>Access</h3>...</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('div.sec').hashContents();
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+.hash-contents-list{
+	margin:0;
+	padding:0;
+	overflow:hidden;
+	border-bottom:solid 1px #ddd;
+}
+.hash-contents-list li{
+	margin:0;
+	padding:4px;
+	float:left;
+	list-style:none;
+}
+.hash-contents-list .active a{
+	color:#ff5577;
+}
+</textarea>
+			</div>
+		</div>
+
+		<div class="demo">
+			<p>
+				タイトルの指定が見つからない場合は、コンテンツ要素の id がリンクリストのテキストとして出力される。
+			</p>
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<div class="sec" id="home"><h3>Home</h3>...</div>
+<div class="sec" id="profile"><h3>Profile</h3>...</div>
+<div class="sec" id="access"><h3>Access</h3>...</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('div.sec').hashContents({
+	listTo : 'after'
+});
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+.hash-contents-list{
+	margin:0;
+	padding:0;
+	overflow:hidden;
+	border-top:solid 1px #ddd;
+}
+.hash-contents-list li{
+	margin:0;
+	padding:4px;
+	float:left;
+	list-style:none;
+}
+.hash-contents-list .active a{
+	color:#ff5577;
+}
+</textarea>
+			</div>
+		</div>
+
+
+		<div class="demo">
+			<p>
+				タイトルの指定が見つからない場合は、コンテンツ要素の id がリンクリストのテキストとして出力される。
+			</p>
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<div class="index">
+	<h3>Index</h3>
+</div>
+<div class="contents">
+	<div class="sec" id="home"><h3>Home</h3>...</div>
+	<div class="sec" id="profile"><h3>Profile</h3>...</div>
+	<div class="sec" id="access"><h3>Access</h3>...</div>
+</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('div.sec').hashContents({
+	listTo : 'div.index'
+});
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+div.index{
+	padding-left:2%;
+	float:right;
+	width:20%;
+}
+div.index a{
+	display:block;
+}
+div.index .active a{
+	background:#eee;
+}
+div.contents{
+	margin-right:24%;
+	width:76%;
+}
+</textarea>
+			</div>
+		</div>
+
+
+
+
+
+		<div class="demo">
+			<p>
+				タイトルの指定が見つからない場合は、コンテンツ要素の id がリンクリストのテキストとして出力される。
+			</p>
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<div class="sec" id="home"><h3>Home</h3>...</div>
+<div class="sec" id="profile"><h3>Profile</h3>...</div>
+<div class="sec" id="access"><h3>Access</h3>...</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('div.sec').hashContents({
+	splitList : true
+});
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+.hash-contents-list a{
+	padding:8px;
+	display:block;
+	text-decoration:none;
+	background:#f0f8ff;
+	border-bottom:solid 1px #fff;
+}
+
+</textarea>
+			</div>
+		</div>
+
+
+
+
+
+
+		<div class="demo">
+			<p>
+				タイトルの指定が見つからない場合は、コンテンツ要素の id がリンクリストのテキストとして出力される。
+			</p>
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<div class="top-list">
+	<div id="home1"><h3>Home</h3>...</div>
+	<div id="profile1"><h3>Profile</h3>...</div>
+	<div id="access1"><h3>Access</h3>...</div>
+</div>
+<hr/>
+<div class="left-list">
+	<div id="home2"><h3>Home</h3>...</div>
+	<div id="profile2"><h3>Profile</h3>...</div>
+	<div id="access2"><h3>Access</h3>...</div>
+</div>
+<hr/>
+<div class="right-list">
+	<div id="home3"><h3>Home</h3>...</div>
+	<div id="profile3"><h3>Profile</h3>...</div>
+	<div id="access3"><h3>Access</h3>...</div>
+</div>
+<hr/>
+<div class="bottom-list">
+	<div id="home4"><h3>Home</h3>...</div>
+	<div id="profile4"><h3>Profile</h3>...</div>
+	<div id="access4"><h3>Access</h3>...</div>
+</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('.top-list div').hashContents();
+$('.left-list div').hashContents();
+$('.right-list div').hashContents();
+$('.bottom-list div').hashContents();
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+</textarea>
+			</div>
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<div class="demo">
+			<p>listTo : 'ul.index' としてリンクリストの挿入先を指定。リストのテキストには h3 要素の値が反映される。</p>
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<div class="index">
+	<h3>Index</h3>
+</div>
+<div class="contents">
+	<div id="home"><h3>Home</h3>...</div>
+	<div id="profile"><h3>Profile</h3>...</div>
+	<div id="access"><h3>Access</h3>...</div>
+</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('div.contents > div').hashContents({
+	listTo : 'div.index'
+});
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+div.index{
+	float:right;
+	width:20%;
+}
+div.contents{
+	margin-right:25%;
+}
+div.index div.active a{
+	color:#ff5577;
+}
+</textarea>
+			</div>
+		</div>
+
+
+
+		<div class="demo">
+			<p>listTo : 'ul.index' としてリンクリストの挿入先を指定。リストのテキストには h3 要素の値が反映される。</p>
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<div class="contents">
+	<div id="home"><h3>Home</h3>...</div>
+	<div id="profile"><h3>Profile</h3>...</div>
+	<div id="access"><h3>Access</h3>...</div>
+</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('div.contents > div').hashContents({
+	listTo : function(api){
+		return api.config.listTo =
+			$('<div class="index"><h3>Index</h3></div>').
+			insertBefore('div.contents');
+	}
+});
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+div.index{
+	float:right;
+	width:20%;
+}
+div.contents{
+	margin-right:25%;
+}
+div.index div.active a{
+	color:#ff5577;
+}
+</textarea>
+			</div>
+		</div>
+
+
+
+
+
+		<div class="demo">
+			<p>listTo : 'ul.index' としてリンクリストの挿入先を指定。リストのテキストには h3 要素の値が反映される。</p>
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<div class="contents">
+	<div id="home"><h3>Home</h3>...</div>
+	<div id="profile"><h3>Profile</h3>...</div>
+	<div id="access"><h3>Access</h3>...</div>
+</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('div.contents > div').hashContents({
+	listTo : function(api){
+		return $('<div/>').
+			insertBefore(api.getActiveTarget());
+	}
+});
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+div.contents div.hash-contents-list a{
+	padding:8px;
+	display:block;
+	text-decoration:none;
+	background:#f0f0f0;
+}
+</textarea>
+			</div>
+		</div>
+
+
+
+		<div class="demo">
+			<p>listTo : 'ul.index' としてリンクリストの挿入先を指定。リストのテキストには h3 要素の値が反映される。</p>
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<div class="index"></div>
+<div class="contents" id="home"><h3>Home</h3>...</div>
+<div class="index"></div>
+<div class="contents" id="profile"><h3>Profile</h3>...</div>
+<div class="index"></div>
+<div class="contents" id="access"><h3>Access</h3>...</div>
+
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('div.contents').hashContents({
+	listTo : 'div.index'
+});
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+div.index a{
+	padding:8px;
+	display:block;
+	text-decoration:none;
+	background:#f0f0f0;
+}
+</textarea>
+			</div>
+		</div>
+
+
+
+
+
+
+
+
+		<div class="demo">
+			<p>titleSelector : 'h4' として h4 要素のテキストをリンクリストに使用。</p>
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<ul class="index"></ul>
+<div class="contents">
+	<div id="home"><h4>Home</h4>...</div>
+	<div id="profile"><h4>Profile</h4>...</div>
+	<div id="access"><h4>Access</h4>...</div>
+</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('div.contents > div').hashContents({
+	listTo : 'ul.index',
+	titleSelector : 'h4'
+});
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+ul.index li.active a{
+	color:#ff5577;
+}
+</textarea>
+			</div>
+		</div>
+
+
+		<div class="demo">
+			<p>data-title 属性でリンクリストのテキストを指定。</p>
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<ul class="index"></ul>
+<div class="contents">
+	<div id="home" data-title="Home">Home is ...</div>
+	<div id="profile" data-title="Profile">Profile is ...</div>
+	<div id="access" data-title="Access">Access is ...</div>
+</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('div.contents > div').hashContents({
+	listTo : 'ul.index'
+});
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+ul.index li.active a{
+	color:#ff5577;
+}
+</textarea>
+			</div>
+		</div>
+
+
+		<div class="demo">
+<p>複数のコンテンツグループに適用。複合ハッシュ値で location を切り替える。</p>
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<div id="A">
+	<ul class="index"></ul>
+	<div id="home"><h3>Home</h3>...</div>
+	<div id="profile"><h3>Profile</h3>...</div>
+</div>
+<div id="B">
+	<ul class="index"></ul>
+	<div id="access"><h3>Access</h3>...</div>
+	<div id="message"><h3>Message</h3>...</div>
+</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('#A > div').hashContents({
+	listTo : '#A ul.index'
+});
+$('#B > div').hashContents({
+	listTo : '#B ul.index'
+});
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+ul.index li.active a{
+	color:#ff5577;
+}
+</textarea>
+			</div>
+		</div>
+
+		<div class="demo">
+<p>複数のコンテンツグループに適用。複合ハッシュ値で location を切り替える。</p>
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<div class="main">
+	<ul class="index"></ul>
+	<div id="javascript">
+		<h3>JavaScript</h3>...
+		<ul class="index"></ul>
+		<div id="jquery">
+			<h4>jQuery</h4>...
+		</div>
+		<div id="backbone_js">
+			<h4>Backbone.js</h4>...
+		</div>
+	</div>
+	<div id="css">
+		<h3>CSS</h3>...
+		<div class="sub">
+			<ul class="index"></ul>
+			<div id="bootstrap"><h4>Bootstrap</h4>...</div>
+			<div id="sass"><h4>Sass</h4>...</div>
+		</div>
+	</div>
+</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('.main > div').hashContents({
+	listTo : '.main > ul.index',
+	onActive : function(api){
+		var target = api.getActiveTarget();
+		target.find('> div.sub').hashContents({
+			listTo : target.find('ul.index')
+		});
+	}
+});
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+ul.index li.active a{
+	color:#ff5577;
+}
+</textarea>
+			</div>
+		</div>
+
+
+		<div class="demo">
+<p>複数のコンテンツグループに適用。複合ハッシュ値で location を切り替える。</p>
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<ul class="contents">
+	<li id="JavaScript">
+		<ul>
+			<li id="jQuery">jQuery is ...</li>
+			<li id="Backbone.js">Backbone.js is ...</li>
+		</ul>
+	</li>
+	<li id="CSS">
+		<ul>
+			<li id="Bootstrap">Bootstrap is ...</li>
+			<li id="Sass">Sass is ...</li>
+		</ul>
+	</li>
+</li>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('.contents > li').hashContents({
+	listTo : function(api){
+		return api.config.target;
+	},
+	addListMethod : 'before'
+});
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+.contents .active a{
+	color:#ff5577;
+}
+.contents li{
+	dlist-style:none;
+}
+</textarea>
+			</div>
+		</div>
+
+
+
+
+
+
+
+
+		<div class="demo">
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<div id="A" class="top-tab-contents">
+	<ul class="index"></ul>
+	<div id="Home">Home is ...</div>
+	<div id="Profile">Profile is ...</div>
+	<div id="Profilex">Profile is ...</div>
+</div>
+<div id="B" class="left-tab-contents">
+	<ul class="index"></ul>
+	<div id="Home1">Home is ...</div>
+	<div id="Profile1">Profile is ...</div>
+	<div id="Profilex1">Profile is ...</div>
+</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('#A > div').hashContents({
+	listTo : '#A ul.index'
+});
+$('#B > div').hashContents({
+	listTo : '#B ul.index'
+});
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+</textarea>
+			</div>
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+		<div class="demo">
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<div id="A" class="vtab-left-contents">
+	<ul class="index"></ul>
+	<div id="Home">Home is ...</div>
+	<div id="Profile">Profile is ...</div>
+	<div id="Profilex">Profile is ...</div>
+</div>
+<div id="B" class="vtab-contents">
+	<ul class="index"></ul>
+	<div id="Access">Access is ...</div>
+	<div id="Message">Message is ...</div>
+</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('#A > div').hashContents({
+	listTo : '#A ul.index'
+});
+/*
+$('#B > div').hashContents({
+	listTo : '#B ul.index'
+});
+*/
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+
+
+
+
+
+
+
+
+
+
+
+/*
+.vtab-contents,
+.vtab-right-contents{
+	margin-top:16px;
+	margin-bottom:16px;
+	overflow:hidden;
+}
+.vtab-contents .hash-contents-list,
+.vtab-right-contents .hash-contents-list{
+	margin:0;
+	margin-right:-1px;
+	padding:0;
+	float:left;
+	width:25%;
+	position:relative;
+}
+.vtab-contents .hash-contents-list li,
+.vtab-right-contents .hash-contents-list li{
+	margin:0;
+	padding:8px;
+	list-style:none;
+	border-right:solid 1px #88aacc;
+}
+.vtab-contents .hash-contents-list li.active,
+.vtab-right-contents .hash-contents-list li.active{
+	border:solid 1px #88aacc;
+	border-right:solid 1px #fff;
+	border-radius:4px 0 0 4px;
+}
+.vtab-contents .hash-contents{
+.vtab-right-contents .hash-contents{
+	margin:0;
+	padding:16px;
+	float:left;
+	width:75%;
+	border-left:solid 1px #88aacc;
+}
+*/
+
+
+
+
+
+
+
+
+
+/*
+.vtab-contents{
+	margin-top:16px;
+	margin-bottom:16px;
+	overflow:hidden;
+}
+.vtab-contents .hash-contents-list{
+	margin:0 -1px 0 0;
+	padding:0;
+	overflow:hidden;
+	float:left;
+	width:20%;
+	border-bottom:solid 1px #88aacc;;
+}
+.vtab-contents .hash-contents-list li{
+	margin:0 0 -1px 0;
+	padding:4px 16px;
+	list-style:none;
+	border:solid 1px #88aacc;
+	border-right-width:0;
+    background:#f8f8f8;
+}
+.vtab-contents .hash-contents-list li.active{
+	position:relative;
+	z-index:1;
+	background:#f0f8ff;
+}
+.vtab-contents .hash-contents{
+	margin:0;
+	padding:16px;
+	border:solid 1px #88aacc;
+	position:relative;
+	background:#f0f8ff;
+	float:left;
+	width:80%;
+}
+*/
+
+/*
+.tab-contents .hash-contents-list{
+	margin:0 0 -1px;
+	padding:0;
+	overflow:hidden;
+}
+.tab-contents .hash-contents-list li{
+	margin:0 -1px 0 0;
+	padding:4px 16px;
+	float:left;
+	list-style:none;
+	border:solid 1px #88aacc;
+	border-bottom-width:0;
+    background:#f8f8f8;
+}
+.tab-contents .hash-contents-list li.active{
+	position:relative;
+	z-index:1;
+	background:#f0f8ff;
+}
+.tab-contents .hash-contents{
+	margin:0 0 16px 0;
+	padding:16px;
+	border:solid 1px #88aacc;
+	position:relative;
+	background:#f0f8ff;
+}
+*/
+</textarea>
+			</div>
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<div class="demo">
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+ul.index li.active a{
+	color:#ff5577
+}
+div.contents div{
+	margin-left:32px;
+	padding-left:16px;
+	border-left:solid 4px #ddd;
+}
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+
+<div class="contents">
+	<ul class="index"></ul>
+	<div id="JavaScript">
+		<ul class="index"></ul>
+		<div id="jQuery">jQuery is ...</div>
+		<div id="Backbone.js">Backbone.js is ...</div>
+	</div>
+	<div id="CSS">
+		<ul class="index"></ul>
+		<div id="Bootstrap">Bootstrap is ...</div>
+		<div id="Sass">Sass is ...</div>
+	</div>
+</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('.contents > div').hashContents({
+	listTo : '.contents > ul.index',
+	onActive : function(api){
+		var target = api.getActiveTarget();
+		target.find('> div').hashContents({
+			listTo : target.find('ul.index')
+		});
+	}
+});
+</textarea>
+			</div>
+		</div>
+
+
+
+
+		<div class="demo">
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+div.contents div{
+	padding:16px;
+	border:solid 1px #ddd;
+	border-top:none;
+	border-radius:0 0 4px 4px;
+}
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+
+<div class="contents">
+	<ul class="index nav nav-tabs"></ul>
+	<div id="JavaScript">
+		<ul class="index nav nav-tabs"></ul>
+		<div id="jQuery">jQuery is ...</div>
+		<div id="Backbone.js">Backbone.js is ...</div>
+	</div>
+	<div id="CSS">
+		<ul class="index nav nav-tabs"></ul>
+		<div id="Bootstrap">Bootstrap is ...</div>
+		<div id="Sass">Sass is ...</div>
+	</div>
+</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('.contents > div').hashContents({
+	listTo : '.contents > ul.index',
+	onActive : function(api){
+		var target = api.getActiveTarget();
+		target.find('> div').hashContents({
+			listTo : target.find('ul.index')
+		});
+	}
+});
+</textarea>
+			</div>
+		</div>
+
+
+
+
+
+
+		<div class="demo">
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+
+<div class="contents">
+	<ul class="index nav nav-pills nav-stacked"></ul>
+	<div id="JavaScript">
+		<ul class="index nav nav-pills nav-stacked"></ul>
+		<div id="jQuery">jQuery is ...</div>
+		<div id="Backbone.js">Backbone.js is ...</div>
+	</div>
+	<div id="CSS">
+		<ul class="index nav nav-pills nav-stacked"></ul>
+		<div id="Bootstrap">Bootstrap is ...</div>
+		<div id="Sass">Sass is ...</div>
+	</div>
+</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('.contents > div').hashContents({
+	listTo : '.contents > ul.index',
+	onActive : function(api){
+		var target = api.getActiveTarget();
+		target.find('> div').hashContents({
+			listTo : target.find('ul.index')
+		});
+	}
+});
+</textarea>
+			</div>
+		</div>
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
+
+
+		<div class="demo">
+			<div class="ex-code-prettify demo-right">
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+div.root-cont, div.cont{
+	padding:16px 32px;
+	border:solid 1px #ddd;
+	border-top:none;
+}
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'html'}">
+<ul class="root-index nav nav-tabs"></ul>
+<div class="root-cont" id="js">
+	<h3>JavaScript</h3>
+	<ul class="index nav nav-tabs"></ul>
+	<div class="cont"><h4>jQuery</h4>...</div>
+	<div class="cont"><h4>Backbone.js</h4>...</div>
+</div>
+<div class="root-cont" id="css">
+	<h3>CSS</h3>
+	<ul class="index nav nav-tabs"></ul>
+	<div class="cont"><h4>Bootstrap</h4>...</div>
+	<div class="cont"><h4>Sass</h4>...</div>
+</div>
+</textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'script'}">
+$('div.root-cont').hashContents({
+	listTo : 'ul.root-index',
+	onActive : function(api){
+		var target = api.getActiveTarget();
+		target.find('> div.cont').hashContents({
+			prefix : api.getParentPrefix(),
+			listTo : target.find('> ul.index'),
+			titleSelector : 'h4'
+		});
+	}
+});
+</textarea>
+			</div>
+		</div>
+-->
+
+
+	</div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}sample{% endblock %}
+
+{% block content %}
+<!-- <h4>こんにちは。{{ name }}さん。</h4>
+<h3>Hello</h3>
+<a href="/list">リストページへ</a> -->
+<div>
+<h3>信州デジタルコモンズ《試作版》</h3>
+</div>
+<div id="bootstrap-menu" class="btn-group">
+    <button type="button" class="btn btn-default dropdown-toggle"
+    data-toggle="dropdown">
+        <span class="active-menu"></span> <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+    </ul>
+</div>
+<div id="contents">
+    <div id="Category"><h3>Category</h3>
+        {% for i in cate%}<a href="/list?para={{ i }}">{{ i }}</a><br/>{% endfor %}</div>
+    <div id="Date"><h3>Date</h3>
+        {% for i in date%}<a href="/list?para={{ i }}">{{ i }}</a><br/>{% endfor %}</div>
+    <div id="Area"><h3>Area</h3>
+         {% for i in area%}<a href="/list?para={{ i }}">{{ i }}</a><br/>{% endfor %}</div>
+</div>
+{% endblock content %}
